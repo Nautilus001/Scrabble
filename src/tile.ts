@@ -3,7 +3,8 @@ export class Tile {
         public letter: string,
         public point: number,
     ) {}
-    toString(): string{ 
-        return `[${this.letter}|${this.point}]`;
+    toString(letter: boolean = false): string { 
+        if (letter) return `[ ${this.letter}]`;
+        return `[${this.letter}|${this.point}]`
     }
 }

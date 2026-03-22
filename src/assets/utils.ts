@@ -1,6 +1,6 @@
 import type {Tile} from "../tile.js";
 import * as fs from 'fs';
-
+export type Board = Array<Array<Square | Tile>>;
 export enum BoardType {NORMAL, RANDOM};
 export enum Square{
     W3,
@@ -9,9 +9,10 @@ export enum Square{
     L2,
     HOME,
     CLEAR,
+    PLACED,
 }
 
-export const SCRABBLE_BOARD: Square[][] = [
+export const SCRABBLE_BOARD: Board = [
   [Square.W3, Square.CLEAR, Square.CLEAR, Square.L2, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.W3, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.L2, Square.CLEAR, Square.CLEAR, Square.W3],
   [Square.CLEAR, Square.W2, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.L3, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.L3, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.W2, Square.CLEAR],
   [Square.CLEAR, Square.CLEAR, Square.W2, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.L2, Square.CLEAR, Square.L2, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.W2, Square.CLEAR, Square.CLEAR],

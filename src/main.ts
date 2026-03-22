@@ -19,7 +19,7 @@ const game = new GameBuilder()
 
 game.setUp();
 console.log(player1.toString());
-console.table(game.squaresBoard);
 console.log(game.bag.toString());
 console.log(game.dict.check("Xylophone"));
 console.log(game.dict.check("PEANUT"));
+console.log(game.toString());

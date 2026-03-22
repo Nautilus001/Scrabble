@@ -3,14 +3,14 @@ import {TreeNode} from "./treenode.js";
 import {Dictionary} from "./dictionary.js"
 import {Bag} from "./bag.js"
 import type {Player} from "./player.js";
-import {BoardType, Square, SCRABBLE_BOARD} from "./assets/utils.js";
-import type {Tile} from "./tile.js";
+import {BoardType, Square, SCRABBLE_BOARD, type Board} from "./assets/utils.js";
+import {Tile} from "./tile.js";
 
 export class Game {
     public dict: Dictionary = new Dictionary([""]);
     public bag: Bag = new Bag();
     public players: Player[] = [];
-    public squaresBoard: Square[][] = [];
+    public board: Board = [];
     public gameBoard: Tile[][] = [];
     public boardType: BoardType = BoardType.NORMAL;
 
@@ -20,10 +20,10 @@ export class Game {
                 player.addToHand(this.bag);
             } 
         });
-        this.squaresBoard = this.genBoard(BoardType.RANDOM);
+        this.board = this.genBoard(BoardType.NORMAL);
     }
 
-    genBoard(style: BoardType, w: number = 15, h: number = 15): Square[][] {
+    genBoard(style: BoardType, w: number = 15, h: number = 15): Board {
         let board: Square[][] = Array.from(Array(h), () => new Array(w).fill(Square.CLEAR));  
         for(let i = 0; i < w; i++) {
             for(let j = 0; j < h; j++) {
@@ -51,6 +51,38 @@ export class Game {
             }
         }
         return board;
+    }
+
+    toString(): string {
+        let game = [];
+        let players: string[] = [];
+        this.players.forEach((player) => {
+            players.push(player.toString());
+        });
+        game.push(`Players:\n${players.join("")}`);
+
+        const boardString = this.board.map(row => {
+            return row.map(cell => {
+
+                if (cell instanceof Tile) {
+                    return cell.toString(true);
+                }
+
+                switch (cell) {
+                    case Square.W3:    return "[W3]";
+                    case Square.W2:    return "[W2]";
+                    case Square.L3:    return "[L3]";
+                    case Square.L2:    return "[L2]";
+                    case Square.HOME:  return "[**]";
+                    case Square.CLEAR: return "[  ]";
+                    default:           return "[??]";
+                }
+            }).join(""); 
+        }).join("\n");  
+    
+        game.push("\nBoard:\n");
+        game.push(boardString);
+        return game.join("");
     }
 }
 

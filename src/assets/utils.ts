@@ -1,7 +1,31 @@
 import type {Tile} from "../tile.js";
 import * as fs from 'fs';
+
+import * as readline from 'readline';
+
+export const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+export type Move = {word: Tile[], cell: number[], direction: Direction}
+
+export enum Direction {
+    VERTICAL = "V",
+    HORIZONTAL = "H",
+}
+
+export function parseDirection(input: string): Direction | undefined {
+    if(Object.values(Direction).includes(input as Direction)) {
+        return input as Direction;
+    }
+    return undefined;
+}
+
 export type Board = Array<Array<Square | Tile>>;
+
 export enum BoardType {NORMAL, RANDOM};
+
 export enum Square{
     W3,
     W2,

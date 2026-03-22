@@ -1,3 +1,4 @@
+import {swap} from "./assets/utils.js";
 import type {Bag} from "./bag.js";
 import type {Tile} from "./tile.js";
 
@@ -11,7 +12,9 @@ export class Player {
     }
 
     addToHand(bag: Bag): Player {
-        this.hand.push(bag.drawTile());
+        let tile = bag.drawTile()
+        if(tile) this.hand.push(tile);
+        else console.log("addToHand got a null response from drawTile()");
         return this;
     }
 
@@ -27,5 +30,20 @@ export class Player {
         }
         arr.push(`} | Score: ${this.score}`);
         return arr.join("");
+    }
+
+    plays(tiles: Tile[]) : Tile[] | null{
+        const temp: Tile[] = [];
+        tiles.forEach((tile) => {
+            const ind = this.hand.indexOf(tile);
+            if(ind !== -1) { 
+                swap(this.hand, ind)
+                temp.push(this.hand.pop()!);
+            } else {
+                this.hand.concat(temp); //undoes all previous pop's
+                return null;
+            }
+        });
+        return temp!;
     }
 }

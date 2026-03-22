@@ -13,8 +13,12 @@ export class Bag {
         })
     }
 
-    public drawTile() : Tile  {
-        if(this.tiles.length === 0) throw new Error("Bag empty")
+    public isEmpty(): boolean {
+        return this.tiles.length === 0;
+    }
+
+    public drawTile() : Tile | undefined  {
+        if(this.tiles.length === 0) return undefined;
         let tileIndex = Math.floor(Math.random() * this.tiles.length);
         this.tiles = swap(this.tiles, tileIndex)
         return this.tiles.pop()!;

@@ -1,10 +1,9 @@
-import {template} from "./template.js";
-import {TreeNode} from "./treenode.js";
 import {Dictionary} from "./dictionary.js"
 import {Bag} from "./bag.js"
 import type {Player} from "./player.js";
-import {BoardType, Square, SCRABBLE_BOARD, type Board, rl, type Move, Direction, parseDirection} from "./assets/utils.js";
+import {Layout, Square, SCRABBLE_BOARD, type Board, type Move, Direction, parseDirection, getReadline} from "./assets/utils.js";
 import {Tile} from "./tile.js";
+import * as readline from 'readline';
 
 export class Game {
     public dict: Dictionary = new Dictionary([""]);
@@ -12,54 +11,22 @@ export class Game {
     public players: Player[] = [];
     public board: Board = [];
     public gameBoard: Tile[][] = [];
-    public boardType: BoardType = BoardType.NORMAL;
+    public boardLayout: Layout = Layout.NORMAL;
 
-    setUp() {
+    constructor() {
         this.players.forEach((player) => {
             while(!player.atCap()) {
                 player.addToHand(this.bag);
             } 
         });
-        this.board = this.genBoard(BoardType.NORMAL);
+        this.board = this.genBoard(Layout.NORMAL);
     }
 
-    getMove(player: Player) : Move | undefined {
-        let move: Move = { word: [], cell: [], direction: Direction.VERTICAL };
-        rl.question("Enter your word:", (word) => {
-            let wordTiles: Tile[] = [];
-            word.split("").forEach((letter) => {
-                const newLetter = Tile.fromString(letter);
-                if(newLetter) wordTiles.push();
-            })
-            let playedTiles = player.plays(wordTiles);
-            if(playedTiles) {
-                move.word = playedTiles; 
-                rl.close();
-            }
-            else return undefined;
-        });
-        rl.question("Enter the Row and Column like this: r,c [Example: 3,2", (rowcol) => {
-            let rc = rowcol.split(",").map((i) => {
-                return parseInt(i);
-            });
-            move.cell = rc;
-            rl.close();
-        });
-        rl.question("Enter the direction you wish to play: (V/H)", (dir) => {
-            let d = parseDirection(dir)
-            if(d) {
-                rl.close();
-                move.direction = d;
-            }
-            else return undefined;
-        });
-        return move;
-    }
-    genBoard(style: BoardType, w: number = 15, h: number = 15): Board {
+    genBoard(style: Layout, w: number = 15, h: number = 15): Board {
         let board: Square[][] = Array.from(Array(h), () => new Array(w).fill(Square.CLEAR));  
         for(let i = 0; i < w; i++) {
             for(let j = 0; j < h; j++) {
-                if(style === BoardType.RANDOM) {
+                if(style === Layout.RANDOM) {
                     const seed = Math.floor(Math.random() * 10); 
                     let squareType: Square;
                     if(seed >= 9) {

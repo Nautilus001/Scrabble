@@ -1,4 +1,4 @@
-import {template} from "./template.js";
+import {template} from "./assets/utils.js";
 import {Tile} from "./tile.js";
 import {swap} from "./assets/utils.js"
 

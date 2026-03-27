@@ -1,4 +1,4 @@
-import type {BoardType} from "./assets/utils.js";
+import type {Layout} from "./assets/utils.js";
 import {Dictionary} from "./dictionary.js";
 import {Game} from "./game.js";
 import {Player} from "./player.js";
@@ -15,8 +15,8 @@ export class GameBuilder {
         return this;
     }
 
-    addBoardType(boardType: BoardType) {
-        this.game.boardType = boardType;
+    addBoardType(boardType: Layout) {
+        this.game.boardLayout = boardType;
         return this;
     }
 

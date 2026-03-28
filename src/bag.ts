@@ -1,4 +1,4 @@
-import {template} from "./assets/utils.js";
+import {swapTiles, template} from "./assets/utils.js";
 import {Tile} from "./tile.js";
 import {swap} from "./assets/utils.js"
 
@@ -20,7 +20,7 @@ export class Bag {
     public drawTile() : Tile | undefined  {
         if(this.tiles.length === 0) return undefined;
         let tileIndex = Math.floor(Math.random() * this.tiles.length);
-        this.tiles = swap(this.tiles, tileIndex)
+        this.tiles = swapTiles(this.tiles, tileIndex)
         return this.tiles.pop()!;
     }
 

@@ -1,6 +1,5 @@
 import type {Bag} from "./bag.js";
 import type {Tile} from "./tile.js";
-import {swap} from "./utils/arrayUtils.js";
 
 export class Player {
     private hand: Tile[] = [];
@@ -12,9 +11,7 @@ export class Player {
     }
 
     addToHand(bag: Bag): Player {
-        let tile = bag.drawTile()
-        if(tile) this.hand.push(tile);
-        else console.log("addToHand got a null response from drawTile()");
+        this.hand.push(bag.drawTile());
         return this;
     }
 
@@ -30,35 +27,5 @@ export class Player {
         }
         arr.push(`} | Score: ${this.score}`);
         return arr.join("");
-    }
-
-    canPlay(word: string) : boolean {
-        let letters = this.hand.map((tile) => {
-            return tile.letter;
-        });
-
-        for(let char of word) {
-            const index = letters.indexOf(char);
-            if (index === -1) return false;
-            swap(letters, index);
-            letters.pop();
-        }
-
-        return true;
-    }
-
-    plays(tiles: Tile[]) : Tile[] | null{
-        const temp: Tile[] = [];
-        tiles.forEach((tile) => {
-            const ind = this.hand.indexOf(tile);
-            if(ind !== -1) { 
-                swap(this.hand, ind)
-                temp.push(this.hand.pop()!);
-            } else {
-                this.hand.concat(temp); //undoes all previous pop's
-                return null;
-            }
-        });
-        return temp!;
     }
 }

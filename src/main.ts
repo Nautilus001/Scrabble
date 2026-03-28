@@ -4,18 +4,18 @@
 
 import {GameBuilder} from "./gamebuilder.js";
 import {Player} from "./player.js";
-import {Layout, readDictionary} from "./assets/utils.js";
+import {Layout} from "./types.js";
+import { stringArrFromFileSync } from "./utils/fileIO.js";
 //board
 
-let validWords = readDictionary();
 
 const player1 = new Player();
 
 const game = new GameBuilder()
                 .addPlayer(player1)
-                .addDictionary(validWords)
+                .addDictionary(stringArrFromFileSync("./assets/dictionary.txt"))
                 .addBoardType(Layout.NORMAL)
-                .build(); // also handles setup
+                .build();
 
 console.log(player1.toString());
 console.log(game.bag.toString());

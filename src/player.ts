@@ -1,6 +1,6 @@
-import {swap, swapTiles} from "./assets/utils.js";
 import type {Bag} from "./bag.js";
 import type {Tile} from "./tile.js";
+import {swap} from "./utils/arrayUtils.js";
 
 export class Player {
     private hand: Tile[] = [];
@@ -52,7 +52,7 @@ export class Player {
         tiles.forEach((tile) => {
             const ind = this.hand.indexOf(tile);
             if(ind !== -1) { 
-                swapTiles(this.hand, ind)
+                swap(this.hand, ind)
                 temp.push(this.hand.pop()!);
             } else {
                 this.hand.concat(temp); //undoes all previous pop's

@@ -1,7 +1,7 @@
-import type {Layout} from "./assets/utils.js";
 import {Dictionary} from "./dictionary.js";
 import {Game} from "./game.js";
 import {Player} from "./player.js";
+import type {Layout} from "./types.js";
 
 export class GameBuilder {
     private game: Game;

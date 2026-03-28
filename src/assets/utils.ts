@@ -78,7 +78,7 @@ export const SCRABBLE_BOARD: Board = [
   [Square.W3, Square.CLEAR, Square.CLEAR, Square.L2, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.W3, Square.CLEAR, Square.CLEAR, Square.CLEAR, Square.L2, Square.CLEAR, Square.CLEAR, Square.W3],
 ];
 
-export function swap(tiles: Tile[], i: number): Tile[] {
+export function swap(tiles: Tile[] | string[], i: number): Tile[] | string[] {
     if(i > tiles.length) return tiles;
     let temp = tiles[tiles.length - 1]!;
     tiles[tiles.length - 1] = tiles[i]!;

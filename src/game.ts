@@ -3,7 +3,6 @@ import {Bag} from "./bag.js"
 import type {Player} from "./player.js";
 import {Layout, Square, SCRABBLE_BOARD, type Board, type Move, Direction, parseDirection} from "./assets/utils.js";
 import {Tile} from "./tile.js";
-import * as readline from 'readline';
 import {InputHandler} from "./inputhandler.js";
 
 export class Game {
@@ -14,7 +13,7 @@ export class Game {
     public gameBoard: Tile[][] = [];
     public boardLayout: Layout = Layout.NORMAL;
     public inputHandler: InputHandler = new InputHandler();
-
+    
     constructor() {
         this.players.forEach((player) => {
             while(!player.atCap()) {
@@ -22,6 +21,22 @@ export class Game {
             } 
         });
         this.board = this.genBoard(Layout.NORMAL);
+    }
+
+    async getMove(player: Player)  {
+        let flag = false;
+        while (!flag) {
+            let word = await this.inputHandler.ask("Word to play: ");
+            if (this.dict.check(word) && player.canPlay(word)) flag = true;
+        }
+        flag = false;
+        while (!flag) {
+            let word = await this.inputHandler.ask("Where to play [row, column]: ");
+            if ( true ) flag = true; //MUST CHANGE THIS TO SQUARE VALIDATION!
+        }
+        //IN PROGRESS
+        
+        
     }
 
     genBoard(style: Layout, w: number = 15, h: number = 15): Board {

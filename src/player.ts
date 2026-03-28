@@ -32,6 +32,21 @@ export class Player {
         return arr.join("");
     }
 
+    canPlay(word: string) : boolean {
+        let letters = this.hand.map((tile) => {
+            return tile.letter;
+        });
+
+        for(let char of word) {
+            const index = letters.indexOf(char);
+            if (index === -1) return false;
+            swap(letters, index);
+            letters.pop();
+        }
+
+        return true;
+    }
+
     plays(tiles: Tile[]) : Tile[] | null{
         const temp: Tile[] = [];
         tiles.forEach((tile) => {

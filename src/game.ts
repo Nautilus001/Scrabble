@@ -2,7 +2,7 @@ import {Dictionary} from "./dictionary.js"
 import {Bag} from "./bag.js"
 import type {Player} from "./player.js";
 import {Tile} from "./tile.js";
-import {InputHandler} from "./inputhandler.js";
+import {InputHandler} from "./io/inputhandler.js";
 import {Board} from "./board.js";
 import {Layout} from "./types.js";
 

@@ -1,9 +1,10 @@
 import {Dictionary} from "./dictionary.js"
 import {Bag} from "./bag.js"
 import type {Player} from "./player.js";
-import {Layout, Square, SCRABBLE_BOARD, type Board, type Move, Direction, parseDirection, getReadline} from "./assets/utils.js";
+import {Layout, Square, SCRABBLE_BOARD, type Board, type Move, Direction, parseDirection} from "./assets/utils.js";
 import {Tile} from "./tile.js";
 import * as readline from 'readline';
+import {InputHandler} from "./inputhandler.js";
 
 export class Game {
     public dict: Dictionary = new Dictionary([""]);
@@ -12,6 +13,7 @@ export class Game {
     public board: Board = [];
     public gameBoard: Tile[][] = [];
     public boardLayout: Layout = Layout.NORMAL;
+    public inputHandler: InputHandler = new InputHandler();
 
     constructor() {
         this.players.forEach((player) => {

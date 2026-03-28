@@ -21,11 +21,4 @@ console.log(player1.toString());
 console.log(game.bag.toString());
 console.log(game.dict.check("Xylophone"));
 console.log(game.dict.check("PEANUT"));
-console.log(game.toString());
-
-// while(!game.bag.isEmpty()) {
-//     game.players.forEach((player) => {
-//         let move = game.getMove(player); //currently crashes game
-//         if(move) console.log(move);
-//     })
-// }
+console.log(await game.inputHandler.ask("Working? (Y/N): "));

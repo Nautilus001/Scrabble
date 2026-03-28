@@ -3,17 +3,6 @@ import * as fs from 'fs';
 
 import * as readline from 'readline';
 
-
-export const getReadline  = (rl: readline.Interface) => {
-    if (!rl) {
-        rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-    }
-    return rl;
-}
-
 export type Move = {word: Tile[], cell: number[], direction: Direction}
 
 export enum Direction {

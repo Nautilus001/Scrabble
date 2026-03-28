@@ -1,7 +1,4 @@
-import {join} from "path";
 import {TreeNode} from "./treenode.js";
-import * as fs from 'fs';
-import {existsSync, readFileSync} from "fs";
 
 export class Dictionary {
     private head: TreeNode;
@@ -21,4 +18,3 @@ export class Dictionary {
         return false;
     }
 }
-

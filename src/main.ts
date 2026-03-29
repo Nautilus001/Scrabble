@@ -2,23 +2,20 @@
 //bag of letters
 //dictionary
 
-import {GameBuilder} from "./gamebuilder.js";
-import {Player} from "./player.js";
+import {GameBuilder} from "./game/GameBuilder.js";
+import {Player} from "./player/Player.js";
+import {ConsoleRenderer} from "./renderer/ConsoleRenderer.js";
 import {Layout} from "./types.js";
-import { stringArrFromFileSync } from "./utils/fileIO.js";
-//board
+import { stringArrFromFileSync } from "./utils/index.js";
 
 
 const player1 = new Player();
 
 const game = new GameBuilder()
                 .addPlayer(player1)
-                .addDictionary(stringArrFromFileSync("./assets/dictionary.txt"))
-                .addBoardType(Layout.NORMAL)
+                .addDictionary(stringArrFromFileSync("./src/assets/dictionary.txt"))
+                .addBoardType(Layout.STANDARD)
                 .build();
 
-console.log(player1.toString());
-console.log(game.bag.toString());
-console.log(game.dict.check("Xylophone"));
-console.log(game.dict.check("PEANUT"));
-console.log(await game.inputHandler.ask("Working? (Y/N): "));
+const renderer = new ConsoleRenderer();
+renderer.render(game);

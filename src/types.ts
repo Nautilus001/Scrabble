@@ -4,7 +4,7 @@ export enum Layout { STANDARD, RANDOM };
 
 export enum Square{ W3, W2, L3, L2, HOME, CLEAR, PLACED }
 
-export type Move = { word: Tile[] | string, row: number, column: number, direction: Direction }
+export type Move = { word: string | Tile[], row: number, column: number, direction: Direction }
 
 export enum Direction { VERTICAL = "V", HORIZONTAL = "H" }
 

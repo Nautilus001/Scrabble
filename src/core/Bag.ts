@@ -22,6 +22,10 @@ export class Bag {
         return Bag.instance;
     }
 
+    public isEmpty(): boolean {
+        return this.count() === 0;
+    }
+
     public count(): number {
         return this.tiles.length;
     }
@@ -31,14 +35,5 @@ export class Bag {
         let tileIndex = Math.floor(Math.random() * this.tiles.length);
         this.tiles = swap(this.tiles, tileIndex)
         return this.tiles.pop()!;
-    }
-
-    public toString() : string {
-        let arr:string[] = ["Bag: ["];
-        this.tiles.forEach((tile) => {
-            arr.push(tile.letter);
-        });
-        arr.push("]");
-        return arr.join("") + `${this.tiles.length}`;
     }
 }

@@ -19,3 +19,7 @@ const game = new GameBuilder()
 
 const renderer = new ConsoleRenderer();
 renderer.render(game);
+
+while(!game.bag.isEmpty()) {
+    await game.moveCoordinator.getMove(game);
+}
